@@ -4,6 +4,7 @@ class BlueRidgeGenerator < Rails::Generator::Base
       m.directory base_dir
       m.file 'application_spec.js', "#{base_dir}/application_spec.js"
       m.file 'spec_helper.js',      "#{base_dir}/spec_helper.js"
+      m.file 'javascript_spec_helper.rb', "#{base_dir}/javascript_spec_helper.rb"
       
       m.directory "#{base_dir}/fixtures"
       m.file 'application.html', "#{base_dir}/fixtures/application.html"
