@@ -244,6 +244,8 @@ Contributors
 * Chris Thatcher (for numerous env.js bug fixes!)
 * Raimonds Simanovskis
 * Jason Rudolph
+* Jonas Nicklas (original fixture rendering code http://gist.github.com/148947)
+* Dr Nic Williams
 
 Copyrights
 ------------
