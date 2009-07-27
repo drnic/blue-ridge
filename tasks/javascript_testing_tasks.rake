@@ -27,18 +27,21 @@ namespace :test do
   end
   
   task :javascript => :javascripts
+  task :js         => :javascripts
 end
 
 # Support RSpec style
 namespace :spec do
   task :javascripts => ["test:javascripts"]
-  task :javascript =>  ["test:javascripts"]
+  task :javascript  => ["test:javascripts"]
+  task :js          => ["test:javascripts"]
 end
 
 # Support Micronaut style
 namespace :examples do
   task :javascripts => ["test:javascripts"]
-  task :javascript =>  ["test:javascripts"]
+  task :javascript  => ["test:javascripts"]
+  task :js          => ["test:javascripts"]
 end
 
 
