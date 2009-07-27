@@ -19,3 +19,18 @@ Given /^I have a non\-Rails project with blue\-ridge installed$/ do
   end
 end
 
+Given /^I create a spec "([^\"]*)" without a fixture file$/ do |spec|
+  in_project_folder do
+    File.open("spec/javascripts/#{spec}_spec.js", "w") do |file|
+      file << <<-SCREWUNIT.gsub(/^      /, '')
+      Screw.Unit(function() {
+        describe("having fun", function(){
+          it("should be awesome", function(){
+          });
+        });
+      });
+      SCREWUNIT
+    end
+  end
+end
+

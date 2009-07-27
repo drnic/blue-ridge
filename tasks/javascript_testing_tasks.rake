@@ -10,17 +10,32 @@ def find_base_dir
   base_dir
 end
 
+def fixture_file_for_spec(spec)
+  fixture_name = File.basename(spec).gsub(/_spec.js/, ".html")
+  File.join(File.dirname(spec), "fixtures", fixture_name)
+end
+
 # Support Test::Unit & Test/Spec style
 namespace :test do
   desc "Runs all the JavaScript tests and outputs the results"
   task :javascripts do
+    require "fileutils"
+    require "erb"
     Dir.chdir(find_base_dir) do
       all_fine = true
       if ENV["TEST"]
         all_fine = false unless system("#{test_runner_command} #{ENV["TEST"]}_spec.js")
       else
         Dir.glob("**/*_spec.js").each do |file|
-          # TODO create fixture file is it doesn't exist
+          fixture_file = fixture_file_for_spec(file)
+          unless File.exists?(fixture_file)
+            FileUtils.mkdir_p(File.dirname(fixture_file))
+            File.open(fixture_file, "w") do |f|
+              template = "#{plugin_prefix}/generators/javascript_spec/templates/fixture.html.erb"
+              class_name_without_spec = file.gsub(/_spec.js/,'').classify
+              f << ERB.new(File.read(template), nil, '-').result(binding)
+            end
+          end
           all_fine = false unless system("#{test_runner_command} #{file}")
         end
       end
