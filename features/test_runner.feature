@@ -12,7 +12,7 @@ Feature: Test runner
   Scenario: Run the test runner in non-Rails project
     Given I have a non-Rails project with blue-ridge installed
     When I invoke task "rake test:js"
-    Then I should see "Running my_lib_spec.js with fixture 'fixtures/my_lib.html'..."
+    Then I should see "Running fun_spec.js with fixture 'fixtures/fun.html'..."
     And I should not see "FAILED"
 
   Scenario: Run the test runner in blue-ridge itself
