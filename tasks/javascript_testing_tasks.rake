@@ -44,7 +44,7 @@ end
 
 namespace :js do
   task :fixtures do
-    fixture_dir = "#{RAILS_ROOT}/#{find_base_dir}/fixtures"
+    fixture_dir = "#{find_base_dir}/fixtures"
     
     if PLATFORM[/darwin/]
       system("open #{fixture_dir}")
