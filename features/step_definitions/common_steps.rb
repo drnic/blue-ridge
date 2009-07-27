@@ -20,37 +20,15 @@ When /^I invoke "(.*)" generator with arguments "(.*)"$/ do |generator, argument
     end
     run_generator(generator, arguments.split(' '), SOURCES, :stdout => @stdout)
   end
-  File.open(File.join(@tmp_root, "generator.out"), "w") do |f|
+  File.open(File.join(@tmp_path, "generator.out"), "w") do |f|
     @stdout.rewind
     f << @stdout.read
   end
 end
 
-When /^I run executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
-  in_project_folder do
-    system "#{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
-  end
-end
-
-When /^I run project executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
-  in_project_folder do
-    system "ruby #{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
-  end
-end
-
-When /^I run local executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
-  executable = File.expand_path(File.join(File.dirname(__FILE__), "/../../bin", executable))
-  in_project_folder do
-    system "ruby #{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
-  end
-end
-
 When /^I invoke task "rake (.*)"/ do |task|
-  @stdout = File.expand_path(File.join(@tmp_root, "tests.out"))
-  @stderr = File.expand_path(File.join(@tmp_root, "tests.err"))
+  @stdout = File.expand_path(File.join(@tmp_path, "tests.out"))
+  @stderr = File.expand_path(File.join(@tmp_path, "tests.err"))
   in_project_folder do
     system "rake #{task} --trace > #{@stdout} 2> #{@stderr}"
   end
@@ -149,7 +127,7 @@ Then /^yaml file "(.*)" contains (\{.*\})/ do |file, yaml|
 end
 
 Then /^Rakefile can display tasks successfully/ do
-  @stdout = File.expand_path(File.join(@tmp_root, "rakefile.out"))
+  @stdout = File.expand_path(File.join(@tmp_path, "rakefile.out"))
   in_project_folder do
     system "rake -T > #{@stdout} 2> #{@stdout}"
   end

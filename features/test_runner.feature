@@ -6,7 +6,7 @@ Feature: Test runner
   Scenario: Run the test runner in Rails project
     Given I have a Rails project with blue-ridge installed
     When I invoke task "rake test:js"
-    Then I should see "Running accounts_new_spec.js with fixture 'fixtures/accounts_new.html'..."
+    Then I should see "Running application_spec.js with fixture 'fixtures/application.html'..."
     And I should not see "FAILED"
   
   Scenario: Run the test runner in non-Rails project

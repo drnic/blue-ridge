@@ -1,10 +1,10 @@
 module CommonHelpers
   def in_tmp_folder(&block)
-    FileUtils.chdir(@tmp_root, &block)
+    FileUtils.chdir(@tmp_path, &block)
   end
 
   def in_project_folder(&block)
-    project_folder = @active_project_folder || @tmp_root
+    project_folder = @active_project_folder || @tmp_path
     FileUtils.chdir(project_folder, &block)
   end
 
@@ -21,7 +21,7 @@ module CommonHelpers
   end
 
   def setup_active_project_folder project_name
-    @active_project_folder = File.join(@tmp_root, project_name)
+    @active_project_folder = File.join(@tmp_path, project_name)
     @project_name = project_name
   end
 end
